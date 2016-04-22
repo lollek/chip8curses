@@ -1,0 +1,3 @@
+[submodule "lib/CHIP-8-Virtual-Machine-Core"]
+	path = lib/CHIP-8-Virtual-Machine-Core
+	url = git@github.com:lollek/CHIP-8-Virtual-Machine-Core.git
