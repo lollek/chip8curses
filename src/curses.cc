@@ -36,6 +36,7 @@ void callback() {
       write_pixel(column * 8 + 7, line, (data & 0x01) != 0 );
     }
   }
+
   flush();
 }
 
@@ -54,6 +55,7 @@ bool start(int min_lines, int min_columns) {
   raw();
   noecho();
   timeout(0);
+  curs_set(0);
   return true;
 }
 
