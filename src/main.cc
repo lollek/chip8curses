@@ -38,21 +38,21 @@ int main(int argc, char* argv[]) {
         loop = false;
         break;
 
-      case '1': chip8core.setKeyState(0x0, (keys.at(0x0) = !keys.at(0x0))); break;
-      case '2': chip8core.setKeyState(0x1, (keys.at(0x1) = !keys.at(0x1))); break;
-      case '3': chip8core.setKeyState(0x2, (keys.at(0x2) = !keys.at(0x2))); break;
-      case '4': chip8core.setKeyState(0x3, (keys.at(0x3) = !keys.at(0x3))); break;
+      case 'x': chip8core.setKeyState(0x0, (keys.at(0x0) = !keys.at(0x0))); break;
+      case '1': chip8core.setKeyState(0x1, (keys.at(0x1) = !keys.at(0x1))); break;
+      case '2': chip8core.setKeyState(0x2, (keys.at(0x2) = !keys.at(0x2))); break;
+      case '3': chip8core.setKeyState(0x3, (keys.at(0x3) = !keys.at(0x3))); break;
       case 'q': chip8core.setKeyState(0x4, (keys.at(0x4) = !keys.at(0x4))); break;
       case 'w': chip8core.setKeyState(0x5, (keys.at(0x5) = !keys.at(0x5))); break;
       case 'e': chip8core.setKeyState(0x6, (keys.at(0x6) = !keys.at(0x6))); break;
-      case 'r': chip8core.setKeyState(0x7, (keys.at(0x7) = !keys.at(0x7))); break;
-      case 'a': chip8core.setKeyState(0x8, (keys.at(0x8) = !keys.at(0x8))); break;
-      case 's': chip8core.setKeyState(0x9, (keys.at(0x9) = !keys.at(0x9))); break;
-      case 'd': chip8core.setKeyState(0xA, (keys.at(0xA) = !keys.at(0xA))); break;
-      case 'f': chip8core.setKeyState(0xB, (keys.at(0xB) = !keys.at(0xB))); break;
-      case 'z': chip8core.setKeyState(0xC, (keys.at(0xC) = !keys.at(0xC))); break;
-      case 'x': chip8core.setKeyState(0xD, (keys.at(0xD) = !keys.at(0xD))); break;
-      case 'c': chip8core.setKeyState(0xE, (keys.at(0xE) = !keys.at(0xE))); break;
+      case 'a': chip8core.setKeyState(0x7, (keys.at(0x7) = !keys.at(0x7))); break;
+      case 's': chip8core.setKeyState(0x8, (keys.at(0x8) = !keys.at(0x8))); break;
+      case 'd': chip8core.setKeyState(0x9, (keys.at(0x9) = !keys.at(0x9))); break;
+      case 'z': chip8core.setKeyState(0xA, (keys.at(0xA) = !keys.at(0xA))); break;
+      case 'c': chip8core.setKeyState(0xB, (keys.at(0xB) = !keys.at(0xB))); break;
+      case '4': chip8core.setKeyState(0xC, (keys.at(0xC) = !keys.at(0xC))); break;
+      case 'r': chip8core.setKeyState(0xD, (keys.at(0xD) = !keys.at(0xD))); break;
+      case 'f': chip8core.setKeyState(0xE, (keys.at(0xE) = !keys.at(0xE))); break;
       case 'v': chip8core.setKeyState(0xF, (keys.at(0xF) = !keys.at(0xF))); break;
     }
 
