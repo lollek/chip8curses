@@ -30,7 +30,12 @@ int main(int argc, char* argv[]) {
 
   bool loop = true;
   while (loop) {
-    chip8core.tick();
+    if (!chip8core.tick()) {
+      curses::stop();
+      cerr << argv[0] << ": fatal error: " << chip8core.getError() << "\n";
+      return 1;
+    }
+
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
     switch (curses::get_char()) {
