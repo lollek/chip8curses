@@ -9,11 +9,17 @@ using namespace std;
 namespace chip8curses {
 namespace curses {
 Emulator* emulator_ptr{nullptr};
+bool double_width;
 
 namespace {
 
 void write_pixel(int x, int y, bool black) {
-  mvaddch(y, x, (black ? ' ' | A_STANDOUT : ' '));
+  if (double_width) {
+    mvaddch(y, x*2, (black ? ' ' | A_STANDOUT : ' '));
+    mvaddch(y, x*2 + 1, (black ? ' ' | A_STANDOUT : ' '));
+  } else {
+    mvaddch(y, x, (black ? ' ' | A_STANDOUT : ' '));
+  }
 }
 
 void flush() {
@@ -42,8 +48,13 @@ void callback() {
 
 } // anonymous namespace
 
-bool start(int min_lines, int min_columns) {
+bool start(int min_lines, int min_columns, bool wide) {
+  double_width = wide;
   initscr();
+
+  if (double_width) {
+    min_columns *= 2;
+  }
 
   if (LINES < min_lines || COLS < min_columns) {
     cerr << "Screen was too small! Need at least " << min_lines

@@ -13,18 +13,28 @@ using namespace chip8curses;
 int constexpr KEY_ESCAPE{27};
 
 int main(int argc, char* argv[]) {
-  if (argc != 2) {
-    cerr << "Usage: " << argv[0] << " FILENAME\n";
+  bool wide = false;
+  int carg = 1;
+
+  if (argc < 2 || !strcmp(argv[carg], "--help") || !strcmp(argv[carg], "-h")) {
+    cerr << "Usage: " << argv[0] << " [-w] FILENAME\n"
+         << "  -w           Tiles are twice as wide\n";
     return 1;
+  }
+
+  if (argc == 3 && !strcmp(argv[carg], "-w")) {
+    ++carg;
+    wide = true;
   }
 
   Emulator chip8core;
-  if (!chip8core.loadFileToRam(argv[1])) {
-    cerr << argv[0] << ": Error loading file: " << chip8core.getError() << "\n";
+  if (!chip8core.loadFileToRam(argv[carg])) {
+    cerr << argv[0] << ": " << argv[carg]
+         << ": Error loading file: " << chip8core.getError() << "\n";
     return 1;
   }
 
-  curses::start(Emulator::screen_rows, Emulator::screen_columns);
+  curses::start(Emulator::screen_rows, Emulator::screen_columns, wide);
   curses::attach(&chip8core);
   vector<bool> keys(Emulator::num_keys);
 
