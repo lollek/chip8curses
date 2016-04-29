@@ -13,8 +13,8 @@ using namespace chip8curses;
 int constexpr KEY_ESCAPE{27};
 
 int main(int argc, char* argv[]) {
-  bool wide = false;
-  int carg = 1;
+  bool wide{false};
+  int carg{1};
 
   if (argc < 2 || !strcmp(argv[carg], "--help") || !strcmp(argv[carg], "-h")) {
     cerr << "Usage: " << argv[0] << " [-w] FILENAME\n"
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
   curses::attach(&chip8core);
   vector<bool> keys(Emulator::num_keys);
 
-  bool loop = true;
+  bool loop{true};
   while (loop) {
     if (!chip8core.tick()) {
       curses::stop();
