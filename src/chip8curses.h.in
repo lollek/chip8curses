@@ -1,0 +1,17 @@
+#pragma once
+
+#define VERSION_BASE "v@chip8curses_VERSION_MAJOR@.@chip8curses_VERSION_MINOR@"
+
+#if @chip8curses_VERSION_PATCH@
+#define VERSION_PATCH "-p@chip8curses_VERSION_PATCH@"
+#else
+#define VERSION_PATCH ""
+#endif
+
+#if @chip8curses_VERSION_TWEAK@
+#define VERSION_TWEAK "-dev@chip8curses_VERSION_TWEAK@"
+#else
+#define VERSION_TWEAK ""
+#endif
+
+#define VERSION VERSION_BASE VERSION_PATCH VERSION_TWEAK

@@ -1,3 +1,5 @@
+#include <getopt.h>
+
 #include <iostream>
 #include <fstream>
 #include <chrono>
@@ -7,29 +9,58 @@
 
 #include "curses.h"
 
+#include "chip8curses.h"
+
 using namespace std;
 using namespace chip8curses;
 
 int constexpr KEY_ESCAPE{27};
 
+int version(string const progname) {
+  cerr << progname << " " << VERSION << "\n";
+  return 1;
+}
+
+int usage(string const progname) {
+  cerr << "Usage: " << progname << " [OPTIONS] FILENAME\n\n"
+       << "Available options:\n"
+       << "  -w, --wide           Tiles are twice as wide\n"
+       << "  -h, --help           Print this usage information\n"
+       << "\n";
+  return version(progname);
+}
+
 int main(int argc, char* argv[]) {
   bool wide{false};
-  int carg{1};
 
-  if (argc < 2 || !strcmp(argv[carg], "--help") || !strcmp(argv[carg], "-h")) {
-    cerr << "Usage: " << argv[0] << " [-w] FILENAME\n"
-         << "  -w           Tiles are twice as wide\n";
-    return 1;
+  vector<option> long_options {
+    {"wide", no_argument, 0, 'w'},
+    {"help", no_argument, 0, 'h'},
+    {0, 0, 0, 0},
+  };
+
+  for (;;) {
+    int index;
+    int c = getopt_long(argc, argv, "wh", long_options.data(), &index);
+
+    if (c == -1) {
+      break;
+    }
+
+    switch (c) {
+      case 'w': wide = true; break;
+      case 'h':
+      default: return usage(argv[0]);
+    }
   }
 
-  if (argc == 3 && !strcmp(argv[carg], "-w")) {
-    ++carg;
-    wide = true;
+  if (optind != argc -1) {
+    return usage(argv[0]);
   }
 
   Emulator chip8core;
-  if (!chip8core.loadFileToRam(argv[carg])) {
-    cerr << argv[0] << ": " << argv[carg]
+  if (!chip8core.loadFileToRam(argv[optind])) {
+    cerr << argv[0] << ": " << argv[optind]
          << ": Error loading file: " << chip8core.getError() << "\n";
     return 1;
   }
